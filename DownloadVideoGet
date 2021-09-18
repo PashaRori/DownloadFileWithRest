@@ -1,0 +1,12 @@
+try {
+  String linkVideo = new Element(browser, xpath).getElementCss("src");
+  URL url = new URL(linkVideo);
+  HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+  httpURLConnection.setRequestMethod("GET");
+  try (InputStream in = httpURLConnection.getInputStream()) {
+    Files.copy(in, new File(road + "file.mp4").toPath(),
+      StandardCopyOption.REPLACE_EXISTING);
+  }
+} catch (IOException e) {
+  e.printStackTrace();
+}
